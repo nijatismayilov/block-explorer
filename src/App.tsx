@@ -1,21 +1,22 @@
-import React                                    from 'react';
+import React                                      from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { LatestBlock }                            from "./pages/LatestBlock.page";
 import { Block }                                  from "./pages/Block.page";
-
-export const ROUTES = {
-  block: "/block/:blockNumber",
-  latest: "/block/latest"
-}
+import {ROUTES}                                   from "./routes.constants";
+import {Header}                                   from "./components/Header.component";
+import {Main}                                     from "./components/Main.component";
 
 const App: React.FC = () => {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path={ROUTES.latest} element={<LatestBlock />} />
-        <Route path={ROUTES.block} element={<Block />} />
-        <Route path={"*"} element={<Navigate to={ROUTES.latest} />} />
-      </Routes>
+      <Header />
+      <Main>
+        <Routes>
+          <Route path={ROUTES.latest} element={<LatestBlock />} />
+          <Route path={ROUTES.block} element={<Block />} />
+          <Route path={"*"} element={<Navigate to={ROUTES.latest} />} />
+        </Routes>
+      </Main>
     </BrowserRouter>
   );
 }
